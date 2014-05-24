@@ -5,10 +5,15 @@ This file describes the data summarization performend on the *Human Activity Rec
 ## Data Summarization  
 
 The script `run_analysis.R`, represents all data compiling and summarizing activies as laied out in the course project descritpion. Code comments describe each individual process in more detail, but `run_analysis.R` performs five general actions:
+
 1. _Merges the training and the test sets to create one data set_ by loading the `X_.txt`, `y_.txt`, and `subject_.txt` files for both sets, as well as the `features.txt` file, and combines into two data frames `df_train` and `df_test` using the `cbind()` function. These are then combined into one data frame `df` using the `rbind()` function.
+
 2. _Extracts only the measurements on the mean and standard deviation for each measurement_ variable by exploiting the `grep()` R function to only extract features containing the `mean()` and `sd()` text patterns for each measurement feature. A new data frame `df_mean_sd` containing only these feature columns is created.
+
 3. _Use descriptive activity names to name the activities in the data set_ to replace the numerical 1-6 activity labels. The `row.names` feature of the `read.table()` function is used to map the numerical values to their text labels (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING).
+
 4. _Appropriately label the data set with descriptive activity names_. This is done using the map desccribed in (3) to replace the number labels in the existing data frame.
+
 5. _Creates a second, independent tidy data set with the average of each variable for each activity and each subject._ After creating a melted dataframe with the `melt()` function from the `reshape2` package, the `dcast()` function is then used summarize the average of each variable over each activity with the `subject_id*action_class ~ variable` formula, and the `mean` function. The `write.table()` function is then used to create a summarized tab-delimited dataset as `tidy_data_tsv.txt`.
 
 Again, `run_analysis.R` script contains numerous additional comments with more details.
